@@ -12,10 +12,13 @@ function saveContacts() {
 }
 
 function renderContacts() {
-  contactList.innerHTML = contacts
-    .map(
-      (contact, index) => `
-    <li data-index="${index}">
+  contactList.innerHTML = "";
+
+  contacts.forEach((contact, index) => {
+    const li = document.createElement("li");
+    li.dataset.index = index;
+
+    li.innerHTML = `
       <strong>${contact.firstName} ${contact.lastName}</strong><br>
       Телефон: ${contact.phone}<br>
       Email: ${contact.email}
@@ -23,10 +26,10 @@ function renderContacts() {
         <button class="edit">Редагувати</button>
         <button class="delete">Видалити</button>
       </div>
-    </li>
-  `
-    )
-    .join("");
+    `;
+
+    contactList.appendChild(li);
+  });
 }
 
 addContactBtn.addEventListener("click", () => {
@@ -46,6 +49,7 @@ addContactBtn.addEventListener("click", () => {
     contacts.push(newContact);
     saveContacts();
     renderContacts();
+
     firstNameInput.value = "";
     lastNameInput.value = "";
     phoneInput.value = "";
@@ -58,7 +62,9 @@ addContactBtn.addEventListener("click", () => {
 contactList.addEventListener("click", (e) => {
   const li = e.target.closest("li");
   if (!li) return;
+
   const index = li.dataset.index;
+  const contact = contacts[index];
 
   if (e.target.classList.contains("delete")) {
     contacts.splice(index, 1);
@@ -67,16 +73,22 @@ contactList.addEventListener("click", (e) => {
   }
 
   if (e.target.classList.contains("edit")) {
-    const contact = contacts[index];
-    const firstName =
+    const updatedFirstName =
       prompt("Нове ім'я:", contact.firstName) || contact.firstName;
-    const lastName =
+    const updatedLastName =
       prompt("Нове прізвище:", contact.lastName) || contact.lastName;
-    const phone = prompt("Новий телефон:", contact.phone) || contact.phone;
-    const email =
+    const updatedPhone =
+      prompt("Новий телефон:", contact.phone) || contact.phone;
+    const updatedEmail =
       prompt("Нова електронна адреса:", contact.email) || contact.email;
 
-    contacts[index] = { firstName, lastName, phone, email };
+    contacts[index] = {
+      firstName: updatedFirstName,
+      lastName: updatedLastName,
+      phone: updatedPhone,
+      email: updatedEmail,
+    };
+
     saveContacts();
     renderContacts();
   }

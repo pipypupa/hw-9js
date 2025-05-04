@@ -47,7 +47,8 @@ li {
   border-radius: 5px;
 }
 
-button.edit,
-button.delete {
-  margin-left: 5px;
+#contactList {
+  text-align: start;
 }
+
+
