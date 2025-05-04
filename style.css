@@ -1,17 +1,21 @@
 body {
-  background: #f4f4f4;
+  background: white;
 }
 
 .container {
   width: 400px;
   margin: 30px auto;
-  background: white;
+  background: cyan;
   padding: 20px;
   border-radius: 8px;
 }
 
 .title {
   text-align: center;
+}
+
+#contactList {
+  text-align: start;
 }
 
 input,
@@ -24,7 +28,7 @@ button {
 }
 
 button {
-  background-color: pink;
+  background-color: lightblue;
   color: white;
   border: none;
   cursor: pointer;
@@ -41,14 +45,8 @@ ul {
 }
 
 li {
-  background: #eee;
+  background: pink;
   margin: 10px 0;
   padding: 10px;
   border-radius: 5px;
 }
-
-#contactList {
-  text-align: start;
-}
-
-
